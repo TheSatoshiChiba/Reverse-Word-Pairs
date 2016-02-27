@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#pragma once
+
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_4_H
+#define __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_4_H
+
+#include "../attempt.h"
+
+namespace rwp {
+    class CAttempt04 final : public IAttempt {
+    public:
+        CAttempt04();
+        ~CAttempt04();
+
+        virtual std::string GetName() const;
+        virtual void Run( const std::string &filename, sAttemptResult &result );
+    };
+}
+#endif

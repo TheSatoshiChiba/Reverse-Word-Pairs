@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+# Specific Folders
+[Bb]uild/
+[Ii]nstall/

@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#pragma once
+
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_RESULT_H
+#define __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_RESULT_H
+
+#include <chrono>
+#include <unordered_map>
+
+namespace rwp {
+    typedef std::unordered_map< std::string, std::string > wordPairs_t;
+
+    struct sTimeDuration {
+        std::chrono::nanoseconds    nanoseconds;
+        std::chrono::microseconds   microseconds;
+        std::chrono::milliseconds   milliseconds;
+        std::chrono::seconds        seconds;
+    };
+
+    struct sAttemptResult {
+        sTimeDuration   algorithmDuration;
+        sTimeDuration   readingDuration;
+        sTimeDuration   completeDuration;
+        wordPairs_t     pairs;
+    };
+}
+#endif

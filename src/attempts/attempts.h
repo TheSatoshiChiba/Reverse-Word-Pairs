@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#pragma once
+
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_H
+#define __REVERSE_WORD_PAIRS_ATTEMPTS_H
+
+#include "attemptManager.h"
+#include "allAttempts/attempt01.h"
+#include "allAttempts/attempt02.h"
+#include "allAttempts/attempt03.h"
+#include "allAttempts/attempt04.h"
+
+#endif

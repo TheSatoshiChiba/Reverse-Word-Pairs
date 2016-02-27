@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#include "attempts/attempts.h"
+#include <iostream>
+
+int main( int argc, char const *argv[] ) {
+    auto attemptManager = rwp::CreateAttemptManager();
+    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt01 >() );
+    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt02 >() );
+    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt03 >() );
+    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt04 >() );
+    attemptManager->RunAttempts();
+    return 0;
+}

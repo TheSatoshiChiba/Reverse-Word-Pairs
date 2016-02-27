@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,39 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#pragma once
+
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPT_MANAGER_H
+#define __REVERSE_WORD_PAIRS_ATTEMPT_MANAGER_H
+
+#include <vector>
+#include <memory>
+#include "attempt.h"
+
+namespace rwp {
+    class CAttemptManager final {
+    public:
+        CAttemptManager();
+        ~CAttemptManager();
+
+        CAttemptManager( const CAttemptManager& ) = delete;
+        CAttemptManager& operator=( const CAttemptManager& ) = delete;
+
+        CAttemptManager( CAttemptManager &&other );
+        CAttemptManager& operator=( CAttemptManager &&other );
+
+        void AddAttempt( attempt_t &&attempt );
+        void RunAttempts() const;
+
+    private:
+        std::vector< attempt_t > attempts;
+    };
+
+    typedef std::unique_ptr< CAttemptManager > attemptManager_t;
+
+    inline attemptManager_t CreateAttemptManager() {
+        return std::make_unique< CAttemptManager >();
+    }
+}
+#endif

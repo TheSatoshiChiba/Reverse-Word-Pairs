@@ -1,3 +1,4 @@
+/********************************************************
 The MIT License (MIT)
 
 Copyright (c) 2014, 2016 Daniel Drywa
@@ -19,3 +20,36 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+********************************************************/
+#pragma once
+
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPT_H
+#define __REVERSE_WORD_PAIRS_ATTEMPT_H
+
+#include <memory>
+#include <string>
+
+#include "attemptResult.h"
+#include "attemptClock.h"
+
+namespace rwp {
+    class IAttempt {
+    protected:
+        attemptClock_t algorithmClock   = CreateAttemptClock();
+        attemptClock_t readingClock     = CreateAttemptClock();
+        attemptClock_t completeClock    = CreateAttemptClock();
+
+    public:
+        virtual ~IAttempt() {}
+        virtual std::string GetName() const = 0;
+        virtual void Run( const std::string &filename, sAttemptResult &result ) = 0;
+    };
+
+    typedef std::unique_ptr< IAttempt > attempt_t;
+
+    template< typename t_attempt_type >
+    inline attempt_t CreateAttempt() {
+        return std::make_unique< t_attempt_type >();
+    }
+}
+#endif
