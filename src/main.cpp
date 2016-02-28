@@ -30,6 +30,7 @@ int main( int argc, char const *argv[] ) {
     attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt02 >() );
     attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt03 >() );
     attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt04 >() );
+    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt05 >() );
     attemptManager->RunAttempts();
     return 0;
 }

@@ -82,6 +82,7 @@ SET( ${PROJECT_NAME}_INC_FILES
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt02.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt03.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt04.h
+	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt05.h
 )
 
 # Source Files
@@ -90,6 +91,7 @@ SET( ${PROJECT_NAME}_SRC_FILES
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt02.cpp
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt03.cpp
 	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt04.cpp
+	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt05.cpp
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attemptManager.cpp
 	${${PROJECT_NAME}_SRC_PATH}/main.cpp
 )
