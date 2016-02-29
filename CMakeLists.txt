@@ -72,26 +72,20 @@ ADD_DEFINITIONS( -DUNICODE -D_UNICODE ) # SET Unicode Definitions
 SET( ${PROJECT_NAME}_SRC_PATH ${PROJECT_SOURCE_DIR}/src )
 
 # Include Files
+FILE( GLOB ${PROJECT_NAME}_INC_FILES ${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/*.h )
 SET( ${PROJECT_NAME}_INC_FILES
+	${${PROJECT_NAME}_INC_FILES}
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attempt.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attemptClock.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attemptManager.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attemptResult.h
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attempts.h
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt01.h
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt02.h
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt03.h
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt04.h
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt05.h
 )
 
 # Source Files
+FILE( GLOB ${PROJECT_NAME}_SRC_FILES ${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/*.cpp )
 SET( ${PROJECT_NAME}_SRC_FILES
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt01.cpp
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt02.cpp
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt03.cpp
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt04.cpp
-	${${PROJECT_NAME}_SRC_PATH}/attempts/allAttempts/attempt05.cpp
+	${${PROJECT_NAME}_SRC_FILES}
 	${${PROJECT_NAME}_SRC_PATH}/attempts/attemptManager.cpp
 	${${PROJECT_NAME}_SRC_PATH}/main.cpp
 )

@@ -21,10 +21,9 @@ This was only a programming challenge for a job interview, so why open source it
 
 Adding new attempts
 -------------------
-* A new attempt should be placed in the src/attempts/allAttempts directory.
+* A new attempt should be placed in the src/attempts/allAttempts directory. A glob is used to include the header and source files.
 * A new attempt must implement the IAttempt class.
 * An instance of the new attempt must be added to the attemptManager object in the src/main.cpp file.
-* New header and source files for a new attempt must be added to the CMakeLists.txt include and source file lists.
 * Three clocks are provided by the IAttempt class, the algorithmClock, readingClock and completeClock. The algorithmClock should run when checking words. The readingClock should run when reading words from the file. The completeClock should run when either clock is running.
 
 LICENSE
