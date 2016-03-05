@@ -1,7 +1,7 @@
 /********************************************************
 The MIT License (MIT)
 
-Copyright (c) 2014, 2016 Daniel Drywa
+Copyright (c) 2016 Daniel Drywa, Matt Champion
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +23,18 @@ SOFTWARE.
 ********************************************************/
 #pragma once
 
-#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_H
-#define __REVERSE_WORD_PAIRS_ATTEMPTS_H
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_5_H
+#define __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_5_H
 
-#include "attemptManager.h"
-#include "allAttempts/attempt01.h"
-#include "allAttempts/attempt02.h"
-#include "allAttempts/attempt03.h"
-#include "allAttempts/attempt04.h"
-#include "allAttempts/attempt05.h"
+#include "../attempt.h"
+namespace rwp {
+    class CAttempt05 final : public IAttempt {
+    public:
+        CAttempt05();
+        ~CAttempt05();
 
+        virtual std::string GetName() const;
+        virtual void Run( const std::string &filename, sAttemptResult &result );
+    };
+}
 #endif
