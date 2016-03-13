@@ -1,7 +1,7 @@
 /********************************************************
 The MIT License (MIT)
 
-Copyright (c) 2014, 2016 Daniel Drywa
+Copyright (c) 2016 Daniel Drywa, Matt Champion
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,17 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ********************************************************/
-#include "attempts/attempts.h"
-#include <iostream>
+#pragma once
 
-int main( int argc, char const *argv[] ) {
-    auto attemptManager = rwp::CreateAttemptManager();
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt01 >() );
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt02 >() );
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt03 >() );
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt04 >() );
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt05 >() );
-    attemptManager->AddAttempt( rwp::CreateAttempt< rwp::CAttempt06 >() );
-    attemptManager->RunAttempts();
-    return 0;
+#ifndef __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_6_H
+#define __REVERSE_WORD_PAIRS_ATTEMPTS_ATTEMPT_6_H
+
+#include "../attempt.h"
+namespace rwp {
+    class CAttempt06 final : public IAttempt {
+    public:
+        CAttempt06();
+        ~CAttempt06();
+
+        virtual std::string GetName() const;
+        virtual void Run( const std::string &filename, sAttemptResult &result );
+    };
 }
+#endif
