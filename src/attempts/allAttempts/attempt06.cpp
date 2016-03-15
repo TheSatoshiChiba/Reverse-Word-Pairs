@@ -61,9 +61,10 @@ namespace rwp {
                     iter->second = true;
                 } else {
                     // If the the current word is not found store false against
-                    // the reversed word
+                    // the reversed word and the reversed word is not already present
                     std::string reversedWord = std::string( word.rbegin(), word.rend() );
-                    reversedWords[ reversedWord ] = false;
+                    std::pair< std::string, bool > new_entry ( reversedWord, false );
+                    reversedWords.insert( new_entry );
                 }
             }
             algorithmClock->End();
