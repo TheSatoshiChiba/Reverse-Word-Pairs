@@ -32,5 +32,6 @@ SOFTWARE.
 #include "allAttempts/attempt03.h"
 #include "allAttempts/attempt04.h"
 #include "allAttempts/attempt05.h"
+#include "allAttempts/attempt06.h"
 
 #endif
