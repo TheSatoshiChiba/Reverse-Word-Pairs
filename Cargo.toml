@@ -1,0 +1,6 @@
+[package]
+name = "reverseWordPairs"
+version = "0.1.0"
+authors = ["Daniel Drywa <daniel@drywa.me>"]
+
+[dependencies]
