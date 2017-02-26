@@ -2,9 +2,6 @@
 name = "reverse_word_pairs"
 version = "0.1.0"
 authors = ["Daniel Drywa <daniel@drywa.me>"]
-build = "build.rs"
+publish = false
 
 [dependencies]
-
-[build-dependencies]
-cmake = "0.1.0"
