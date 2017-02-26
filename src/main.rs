@@ -38,12 +38,16 @@ fn search_file( file : &File ) -> HashMap<String, u32> {
 fn main() {
     let file = File::open( "data/TheReverseWordTest.txt" ).unwrap();
     let pairs = search_file( &file );
+    let mut pair_count = 0;
 
-    for ( key, count ) in pairs {
-        println!(
-            "{}/{} - {}",
+    for ( key, count ) in pairs.iter().filter( |x| *x.1 > 0 ) {
+        pair_count += 1;
+        print!(
+            "[{}/{} - {}]",
             key,
             reverse_word( &key ),
             count );
     }
+    println!( "" );
+    println!( "Pairs: {}", pair_count );
 }
