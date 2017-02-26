@@ -10,17 +10,17 @@ mod attempt {
             String::from_iter( word.chars().rev() )
         }
 
-        fn insert_word_pair( pairs : &mut HashMap<String, u32>, word : &str ) {
+        fn insert_word_pair( pairs : &mut HashMap<String, bool>, word : &str ) {
             if let Entry::Occupied( mut x ) = pairs.entry( String::from( word ) ) {
-                *x.get_mut() += 1;
+                *x.get_mut() = true;
                 return;
             }
 
-            pairs.entry( reverse_word( &word ) ).or_insert( 0 );
+            pairs.entry( reverse_word( &word ) ).or_insert( false );
         }
 
         pub fn run( file : &File ) -> usize {
-            let mut pairs : HashMap<String, u32> = HashMap::new();
+            let mut pairs : HashMap<String, bool> = HashMap::new();
             let mut word = String::with_capacity( 1024 );
 
             for byte in file.bytes() {
@@ -34,42 +34,41 @@ mod attempt {
                 }
             }
 
-            pairs.iter().filter( |x| *x.1 > 0 ).count()
+            pairs.iter().filter( |x| *x.1 ).count()
         }
     }
 }
 
 use std::fs::File;
+use std::time::{Duration, Instant};
 
-fn run_attempt<F>( name : &str, attempt : F )
+fn run_attempt<F>( name : &str, attempt : F ) -> u64
     where F : Fn( &File ) -> usize {
 
     println!( "Starting attempt {}", name );
-    let file = File::open( "data/TheReverseWordTest.txt" ).unwrap();
 
+    let file = File::open( "data/TheReverseWordTest.txt" ).unwrap();
+    let now = Instant::now();
     let result = attempt( &file );
+    let duration = now.elapsed();
+    let time = ( duration.as_secs() * 1000 ) + ( duration.subsec_nanos() / 1_000_000 ) as u64;
+
     println!(
         "Finished attempt {} in {}ms with {} pairs found.",
         name,
-        0,
+        time,
         result );
+
+    time
 }
 
 fn main() {
-    run_attempt( "#1", attempt::attempt1::run );
+    let mut average : u64 = 0;
+    let count = 100;
 
+    for _ in 0..count {
+        average += run_attempt( "#1", attempt::attempt1::run );
+    }
 
-    // let pairs = search_file( &file );
-    // let mut pair_count = 0;
-
-    // for ( key, count ) in pairs {
-    //     pair_count += 1;
-    //     print!(
-    //         "[{}/{} - {}]",
-    //         key,
-    //         reverse_word( &key ),
-    //         count );
-    // }
-    // println!( "" );
-    // println!( "Pairs: {}", pair_count );
+    println!("Average of {} runs: {}ms", count, average / count );
 }
