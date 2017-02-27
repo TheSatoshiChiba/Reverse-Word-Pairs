@@ -1,4 +1,11 @@
 [root]
 name = "reverse_word_pairs"
 version = "0.1.0"
+dependencies = [
+ "rust_attempts 0.1.0",
+]
+
+[[package]]
+name = "rust_attempts"
+version = "0.1.0"
 
