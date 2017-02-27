@@ -1,26 +1,31 @@
 pub mod attempt1;
 
 use std::fs::File;
-use std::time::Instant;
+use std::time::{Duration, Instant};
+
+trait AsMilliseconds {
+    fn as_msecs( &self ) -> u64;
+}
+
+impl AsMilliseconds for Duration {
+    fn as_msecs( &self ) -> u64 {
+        ( self.as_secs() * 1000 ) + ( self.subsec_nanos() / 1_000_000 ) as u64
+    }
+}
 
 pub fn run<F>( name : &str, filename : &str, attempt : &F ) -> u64
     where F : Fn( &File ) -> usize {
 
-    println!( "Starting attempt {}", name );
+    print!( "Running attempt {}", name );
 
     let file = File::open( filename ).unwrap();
     let now = Instant::now();
     let result = attempt( &file );
-    let duration = now.elapsed();
-    let time = ( duration.as_secs() * 1000 ) + ( duration.subsec_nanos() / 1_000_000 ) as u64;
+    let duration = now.elapsed().as_msecs();
 
-    println!(
-        "Finished attempt {} in {}ms with {} pairs found.",
-        name,
-        time,
-        result );
+    print!( "." );
 
-    time
+    duration
 }
 
 pub fn repeat<F>( name : &str, filename : &str, count : u64, attempt : &F ) -> u64
