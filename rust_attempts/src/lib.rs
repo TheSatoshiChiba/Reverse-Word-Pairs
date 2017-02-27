@@ -41,13 +41,22 @@ pub fn repeat<F>( name : &str, filename : &str, count : u64, attempt : &F ) -> u
     average
 }
 
-pub fn run_all( count : u32, file : &File ) {
-    // let mut attempts = Vec::new();
-    // attempts.push( attempt1::run );
+pub fn run_all<F>( attempts : &Vec<F>, count : u64, filename : &str ) -> Vec<u64>
+    where F : Fn( &File ) -> usize {
 
-    // let mut id = 0;
-    // for attempt in &attempts {
-    //     id += 1;
-    //     run( "Attempt #" + id, file, )
-    // }
+    println!( "Running all {} attempts {} times.", attempts.len(), count );
+
+    let mut id = 0;
+    let mut results = Vec::new();
+    for attempt in attempts {
+        id += 1;
+        let mut name = String::from( "#" );
+        name.push_str( &id.to_string() );
+
+        results.push( repeat( &name, filename, count, &attempt ) );
+    }
+
+    println!( "Finished all {} attempts. Results:", attempts.len() );
+
+    results
 }
