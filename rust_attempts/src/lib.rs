@@ -13,19 +13,14 @@ impl AsMilliseconds for Duration {
     }
 }
 
-pub fn run<F>( name : &str, filename : &str, attempt : &F ) -> u64
+pub fn run<F>( filename : &str, attempt : &F ) -> u64
     where F : Fn( &File ) -> usize {
-
-    print!( "Running attempt {}", name );
 
     let file = File::open( filename ).unwrap();
     let now = Instant::now();
     let result = attempt( &file );
-    let duration = now.elapsed().as_msecs();
 
-    print!( "." );
-
-    duration
+    now.elapsed().as_msecs()
 }
 
 pub fn repeat<F>( name : &str, filename : &str, count : u64, attempt : &F ) -> u64
@@ -36,7 +31,7 @@ pub fn repeat<F>( name : &str, filename : &str, count : u64, attempt : &F ) -> u
     let mut time : u64 = 0;
 
     for _ in 0..count {
-        time += run( name, filename, attempt );
+        time += run( filename, attempt );
     }
 
     let average = time / count;
