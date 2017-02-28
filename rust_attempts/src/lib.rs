@@ -1,6 +1,5 @@
 pub mod attempt1;
 
-use std::io;
 use std::io::Write;
 use std::fs::File;
 use std::time::{Duration, Instant};
