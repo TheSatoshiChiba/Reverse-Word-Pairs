@@ -25,20 +25,30 @@ fn flush_console() {
     std::io::stdout().flush().unwrap();
 }
 
+/// The result of a single attempt
+struct AttemptResult {
+    /// The number of found pairs
+    pairs : usize,
+
+    /// The runtime of the attempt in milliseconds
+    runtime : u64,
+}
+
 /// Runs a single attempt against a specified file name.
 ///
 /// #Arguments
 ///
 /// * `filename` - The name of the file to use for this attempt.
 /// * `attempt` - The attempt function of type `Fn( &File ) -> usize`.
-fn run_attempt<F>( filename : &str, attempt : &F ) -> ( usize, u64 )
+fn run_attempt<F>( filename : &str, attempt : &F ) -> AttemptResult
     where F : Fn( &File ) -> usize {
 
     let file = File::open( filename ).unwrap();
     let now = Instant::now();
-    let result = attempt( &file );
+    let pairs = attempt( &file );
+    let runtime = now.elapsed().as_msecs();
 
-    ( result, now.elapsed().as_msecs() )
+    AttemptResult { pairs : pairs, runtime : runtime }
 }
 
 /// Runs a single attempt a given number of times and returns the average result.
@@ -60,13 +70,13 @@ fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<( u
     for _ in 0..times {
         print!( "." );
 
-        let ( c, ms ) = run_attempt( filename, attempt );
+        let result = run_attempt( filename, attempt );
 
-        time += ms;
+        time += result.runtime;
 
         if count == 0 {
-            count = c;
-        } else if c != count {
+            count = result.pairs;
+        } else if result.pairs != count {
             return Err( "Found pairs different from previous run." );
         }
 
