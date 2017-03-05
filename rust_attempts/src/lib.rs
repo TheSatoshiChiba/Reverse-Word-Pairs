@@ -61,7 +61,7 @@ fn run_attempt<F>( filename : &str, attempt : &F ) -> AttemptResult
 /// * `times` - The number of times the attempt will be run.
 /// * `filename` - The name of the file to use for this attempt.
 /// * `attempt` - The attempt function of type `Fn( &File ) -> usize`.
-fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<( usize, u64 ), &'static str>
+fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<AttemptResult, &'static str>
     where F : Fn( &File ) -> usize {
 
     let mut time : u64 = 0;
@@ -83,7 +83,7 @@ fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<( u
         flush_console();
     }
 
-    Ok( ( count, time / times ) )
+    Ok( AttemptResult { pairs: count, runtime : time / times } )
 }
 
 /// Runs a given vector of attempts a given number of times and prints the results to the console.
@@ -98,7 +98,7 @@ pub fn run<F>( attempts : &Vec<F>, times : u64, filename : &str )
 
         print!("Attempt #{}", id );
         match repeat_attempt( times, filename, &attempt ) {
-            Ok( ( size, average ) ) => println!( "OK [Pairs: {}, Average: {}ms]", size, average ),
+            Ok( result ) => println!( "OK [Pairs: {}, Average: {}ms]", result.pairs, result.runtime ),
             _ => println!( "FAILED" )
         }
     }
