@@ -1,3 +1,10 @@
+//! This is the first reverse_word attempt.
+//! It is based on the fastest C++ solution which stores the reverse word
+//! in a HashMap with a simple boolean value to indicate if it has a pair or not.
+//! This solution is making use of the most sensible std functionality that
+//! I could find at the time without thinking too much about the implementation details.
+//! It can already compare to the C++ version which is great!
+
 use std::fs::File;
 use std::io::prelude::*;
 use std::iter::FromIterator;

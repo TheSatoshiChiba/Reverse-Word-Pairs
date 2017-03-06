@@ -1,6 +1,7 @@
 //! A module for reverse-word-pairs attempts.
 
 pub mod attempt1;
+pub mod attempt2;
 
 use std::io::Write;
 use std::fs::File;
@@ -26,7 +27,7 @@ fn flush_console() {
 }
 
 /// The result of a single attempt
-struct AttemptResult {
+pub struct AttemptResult {
     /// The number of found pairs
     pairs : usize,
 
@@ -61,11 +62,14 @@ fn run_attempt<F>( filename : &str, attempt : &F ) -> AttemptResult
 /// * `times` - The number of times the attempt will be run.
 /// * `filename` - The name of the file to use for this attempt.
 /// * `attempt` - The attempt function of type `Fn( &File ) -> usize`.
-fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<AttemptResult, &'static str>
+pub fn run<F>( name : &str, times : u64, filename : &str, attempt : &F ) -> Result<AttemptResult, &'static str>
     where F : Fn( &File ) -> usize {
 
     let mut time : u64 = 0;
     let mut count : usize = 0;
+
+    print!( "Running {}:", name );
+    flush_console();
 
     for _ in 0..times {
         print!( "." );
@@ -77,29 +81,15 @@ fn repeat_attempt<F>( times : u64, filename : &str, attempt : &F ) -> Result<Att
         if count == 0 {
             count = result.pairs;
         } else if result.pairs != count {
+            println!( "FAILED" );
             return Err( "Found pairs different from previous run." );
         }
 
         flush_console();
     }
 
-    Ok( AttemptResult { pairs: count, runtime : time / times } )
-}
+    let runtime = time / times;
+    println!( "OK [Pairs: {}, Average: {}ms]", count, runtime );
 
-/// Runs a given vector of attempts a given number of times and prints the results to the console.
-pub fn run<F>( attempts : &Vec<F>, times : u64, filename : &str )
-    where F : Fn( &File ) -> usize {
-
-    println!( "Running all {} attempts {} times.", attempts.len(), times );
-
-    let mut id = 0;
-    for attempt in attempts {
-        id += 1;
-
-        print!("Attempt #{}", id );
-        match repeat_attempt( times, filename, &attempt ) {
-            Ok( result ) => println!( "OK [Pairs: {}, Average: {}ms]", result.pairs, result.runtime ),
-            _ => println!( "FAILED" )
-        }
-    }
+    Ok( AttemptResult { pairs: count, runtime : runtime } )
 }
