@@ -29,10 +29,10 @@ fn flush_console() {
 /// The result of a single attempt
 pub struct AttemptResult {
     /// The number of found pairs
-    pairs : usize,
+    pub pairs : usize,
 
     /// The runtime of the attempt in milliseconds
-    runtime : u64,
+    pub runtime : u64,
 }
 
 /// Runs a single attempt against a specified file name.
