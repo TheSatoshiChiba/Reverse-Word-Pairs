@@ -30,11 +30,11 @@ Adding new attempts
 
 Rust Version
 ------------
-There is a rust version of this challenge now which can be build by running 'cargo build' in the parent directory of this repository. The rust version comes in two parts. The main executable under src/main.rs. And the rust_attempts library which contains the basic attempts API and the attempts itself. The Attempts API is different from the C++ one as it only contains a single function that accepts a name, the number of times the attempts needs to run, the filename of the file that contains all the words and a function of type 'Fn( &File ) -> usize' where the return value is the number of word pairs found. The function itself returns a Result<AttemptResult>. The only time this function fails is if the found word pairs differ between the runs. AttemptResult contains the number of word pairs found and the average runtime in milliseconds. To run the executable simply use 'cargo run' in the parent directory of this repository.
+There is a rust version of this challenge now which can be build by running `cargo build` in the parent directory of this repository. The rust version comes in two parts. The main executable under `src/main.rs`. And the rust_attempts library which contains the basic attempts API and the attempts itself. The Attempts API is different from the C++ one as it only contains a single function that accepts a name, the number of times the attempts needs to run, the filename of the file that contains all the words and a function of type `Fn( &File ) -> usize` where the return value is the number of word pairs found. The function itself returns a `Result<AttemptResult>`. The only time this function fails is if the found word pairs differ between the runs. `AttemptResult` contains the number of word pairs found and the average runtime in milliseconds. To run the executable simply use `cargo run` in the parent directory of this repository.
 
 Unlike the C++ version there is no file output. It is entirely console based.
 
-To add a new attempt simply create a new module within the rust_attempts library with a public run function of type 'Fn( &File ) -> usize' and pass it to the rust_attempts::run function in the main file. It will take care of the correct console output and time measurements.
+To add a new attempt simply create a new module within the rust_attempts library with a public run function of type `Fn( &File ) -> usize` and pass it to the `rust_attempts::run` function in the main file. It will take care of the correct console output and time measurements.
 
 Why Rust?
 ---------
